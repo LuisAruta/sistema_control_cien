@@ -1,0 +1,69 @@
+created:
+    - app/Http/Controllers/Api/LugarController.php
+    - app/Http/Controllers/Api/DelitoController.php
+    - app/Http/Controllers/Api/EstadoController.php
+    - app/Http/Controllers/Api/DocumentoController.php
+    - app/Http/Controllers/Api/ExpendienteController.php
+    - app/Http/Controllers/Api/ReconstrucionCriminalController.php
+    - app/Http/Controllers/Api/NecroController.php
+    - app/Http/Controllers/Api/TrasladoController.php
+    - app/Http/Controllers/Api/DependenciaController.php
+    - database/factories/LugarFactory.php
+    - database/factories/DelitoFactory.php
+    - database/factories/EstadoFactory.php
+    - database/factories/DependenciaFactory.php
+    - database/factories/DocumentoFactory.php
+    - database/factories/ExpedienteFactory.php
+    - database/factories/ReconstrucionCriminalFactory.php
+    - database/factories/NecroFactory.php
+    - database/factories/TrasladoFactory.php
+    - database/migrations/2021_01_29_120227_create_lugars_table.php
+    - database/migrations/2021_01_29_120228_create_delitos_table.php
+    - database/migrations/2021_01_29_120229_create_estados_table.php
+    - database/migrations/2021_01_29_120230_create_dependencias_table.php
+    - database/migrations/2021_01_29_120231_create_documentos_table.php
+    - database/migrations/2021_01_29_120232_create_expedientes_table.php
+    - database/migrations/2021_01_29_120233_create_reconstrucion_criminals_table.php
+    - database/migrations/2021_01_29_120234_create_necros_table.php
+    - database/migrations/2021_01_29_120235_create_traslados_table.php
+    - app/Models/Lugar.php
+    - app/Models/Delito.php
+    - app/Models/Estado.php
+    - app/Models/Dependencia.php
+    - app/Models/Documento.php
+    - app/Models/Expediente.php
+    - app/Models/ReconstrucionCriminal.php
+    - app/Models/Necro.php
+    - app/Models/Traslado.php
+    - app/Http/Resources/LugarCollection.php
+    - app/Http/Resources/LugarResource.php
+    - app/Http/Resources/DelitoCollection.php
+    - app/Http/Resources/DelitoResource.php
+    - app/Http/Resources/EstadoCollection.php
+    - app/Http/Resources/EstadoResource.php
+    - app/Http/Resources/DocumentoCollection.php
+    - app/Http/Resources/DocumentoResource.php
+    - app/Http/Resources/ExpendienteCollection.php
+    - app/Http/Resources/ExpendienteResource.php
+    - app/Http/Resources/ReconstrucionCriminalCollection.php
+    - app/Http/Resources/ReconstrucionCriminalResource.php
+    - app/Http/Resources/NecroCollection.php
+    - app/Http/Resources/NecroResource.php
+    - app/Http/Resources/TrasladoCollection.php
+    - app/Http/Resources/TrasladoResource.php
+    - app/Http/Resources/DependenciumCollection.php
+    - app/Http/Resources/DependenciumResource.php
+updated:
+    - routes/api.php
+models:
+    Models\OAuthProvider: { user_id: biginteger, provider: string, provider_user_id: string, access_token: 'string nullable', refresh_token: 'string nullable' }
+    Models\User: { name: string, email: string, email_verified_at: 'datetime nullable', dependencia_id: biginteger, documento_id: biginteger, nombre_completo: 'string:100', password: 'string nullable', remember_token: 'string:100 nullable' }
+    Lugar: { latitud: 'string:100 nullable', longitud: 'string:100 nullable', departamento: 'string:100 nullable', barrio: 'string:100 nullable', localidad: 'string:100 nullable', calle: 'string:100 nullable', numero: 'string:10 nullable', numero_departamento: 'string:10 nullable' }
+    Delito: { nombre: 'string:100' }
+    Estado: { nombre: 'string:100' }
+    Dependencia: { nombre: 'string:100', grupo: 'string:100 nullable', cientifica: 'boolean default:false' }
+    Documento: { tipo_documento: 'string:20', numero: 'string:20' }
+    Expediente: { nombre: 'string:100', juzgado: 'string:100' }
+    ReconstrucionCriminal: { fecha: 'timestamp nullable', expediente_id: 'id:expediente nullable foreign:expediente nullable', descripcion: 'string:400 nullable', plano: 'boolean default:false', foto: 'boolean default:false', video: 'boolean default:false', cantidad_dactilares: 'integer nullable', cantidad_palmares: 'integer nullable', cantidad_calzados: 'integer nullable', cantidad_papilares: 'integer nullable', cantidad_celulas_epiteliales: 'integer nullable', delito_id: 'id:delito foreign:delito nullable', dependencia_id: 'id:dependencia foreign:dependencia nullable', lugar_id: 'id:lugar foreign:lugar nullable', estado_id: 'id:estado foreign:estado', perito_usuario_id: 'id:user foreign:user nullable', tecnico_revelador_usuario_id: 'id:user nullable foreign:user', planimetrista_usuario_id: 'id:user nullable foreign:user', fotografo_usuario_id: 'id:user nullable foreign:user', video_usuario_id: 'id:user nullable foreign:user' }
+    Necro: { fecha_hora: 'timestamp nullable', expediente_id: 'id:expediente foreign:expdiente nullable', perito_usuario_id: 'nullable id:user foreign:user nullable', delegacion_dependencia_id: 'nullable id:dependencia foreign:dependencia', interviniento_dependencia_id: 'nullable id:dependencia foreign:dependencia', cadaver_nombre: 'string:100 nullable', cadaver_documento_id: 'nullable id:documento foreign:documento', legajo_cuerpo_medico_forense: 'string:50 nullable', lugar_id: 'nullable id:lugar', foto: 'boolean default:false', estado_id: 'nullable id:estado' }
+    Traslado: { fecha_hora: 'timestamp nullable', expediente_id: 'id:expediente foreign:expediente nullable', perito_usuario_id: 'id:user foreign:user nullable', acompanante_usuario_id: 'id:user foreign:user nullable', cadaver_nombre: 'string:100 nullable', cadaver_documento_id: 'nullable id:documento foreign:documento nullable', legajo_cuerpo_medico_forense: 'string:50 nullable', lugar_id: 'id:lugar foreign:lugar nullable', foto: 'boolean default:false nullable', dependencia_id: 'id:dependencia foreign:dependencia nullable' }

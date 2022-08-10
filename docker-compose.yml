@@ -1,0 +1,52 @@
+version: "3.7"
+services:
+  waste:
+    build:
+      args:
+        user: luis
+        uid: 1000
+      context: ./
+      dockerfile: ./Dockerfile
+    image: cientifica_back
+    container_name: cientifica
+    restart: always
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www
+    networks:
+      - cientifica_network
+
+  db:
+    image: mysql:5.7
+    container_name: cientifica-db
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_DATABASE: cientifica
+      MYSQL_USER_ROOT: root
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: mysql
+      MYSQL_USER: secret
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - ./docker-compose/mysql:/docker-entrypoint-initdb.d
+    networks:
+      - cientifica_network
+
+  nginx:
+    image: nginx:alpine
+    container_name: cientifica-nginx
+    restart: always
+    ports:
+      - 8000:80
+    volumes:
+      - ./:/var/www
+      - ./docker-compose/nginx:/etc/nginx/conf.d/
+    networks:
+      - cientifica_network
+
+networks:
+  cientifica_network:
+    driver: bridge

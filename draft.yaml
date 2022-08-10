@@ -1,0 +1,87 @@
+models:
+    Lugar:
+        latitud: string:100 nullable
+        longitud: string:100 nullable
+        departamento: string:100 nullable
+        barrio: string:100 nullable
+        localidad: string:100 nullable
+        calle: string:100 nullable
+        numero: string:10 nullable
+        numero_departamento: string:10 nullable
+    Delito:
+        nombre: string:100
+    Estado:
+        nombre: string:100
+    Dependencia:
+        nombre: string:100
+        grupo: string:100 nullable
+        cientifica: boolean default:false
+    Documento:
+        tipo_documento: string:20
+        numero: string:20
+    Expediente:
+        nombre: string:100
+        juzgado: string:100
+    ReconstrucionCriminal:
+        fecha: timestamp nullable
+        expediente_id: id:expediente nullable foreign:expediente nullable
+        descripcion: string:400 nullable
+        plano: boolean default:false
+        foto: boolean default:false
+        video: boolean default:false
+        cantidad_dactilares: integer nullable
+        cantidad_palmares: integer nullable
+        cantidad_calzados: integer nullable
+        cantidad_papilares: integer nullable
+        cantidad_celulas_epiteliales: integer nullable
+        delito_id: id:delito foreign:delito nullable
+        dependencia_id: id:dependencia foreign:dependencia nullable
+        lugar_id: id:lugar foreign:lugar nullable
+        estado_id: id:estado foreign:estado
+        perito_usuario_id: id:user foreign:user nullable
+        tecnico_revelador_usuario_id: id:user nullable foreign:user
+        planimetrista_usuario_id: id:user nullable foreign:user
+        fotografo_usuario_id: id:user nullable foreign:user
+        video_usuario_id: id:user nullable foreign:user
+    Necro:
+        fecha_hora: timestamp nullable
+        expediente_id: id:expediente foreign:expdiente nullable
+        perito_usuario_id: nullable id:user foreign:user nullable
+        delegacion_dependencia_id: nullable id:dependencia foreign:dependencia
+        interviniento_dependencia_id: nullable id:dependencia foreign:dependencia
+        cadaver_nombre: string:100 nullable
+        cadaver_documento_id: nullable id:documento foreign:documento
+        legajo_cuerpo_medico_forense: string:50 nullable
+        lugar_id: nullable id:lugar
+        foto: boolean default:false
+        estado_id: nullable id:estado
+    Traslado:
+        fecha_hora: timestamp nullable
+        expediente_id: id:expediente foreign:expediente nullable
+        perito_usuario_id: id:user foreign:user nullable
+        acompanante_usuario_id: id:user foreign:user nullable
+        cadaver_nombre: string:100 nullable
+        cadaver_documento_id: nullable id:documento foreign:documento nullable
+        legajo_cuerpo_medico_forense: string:50 nullable
+        lugar_id: id:lugar foreign:lugar nullable
+        foto: boolean default:false nullable
+        dependencia_id: id:dependencia foreign:dependencia nullable
+controllers:
+    Lugar:
+        resource: api
+    Delito:
+        resource: api
+    Estado:
+        resource: api
+    Documento:
+        resource: api
+    Expendiente:
+        resource: api
+    ReconstrucionCriminal:
+        resource: api
+    Necro:
+        resource: api
+    Traslado:
+        resource: api
+    Dependencia:
+        resource: api
